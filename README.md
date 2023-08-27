@@ -1,6 +1,2 @@
-# Zoom Video Test (WIP)
+# Starter App
 
-This is a test of the Zoom video API in a React project.
-
-To run:
-`yarn + yarn start`
