@@ -6,7 +6,6 @@ export let useAppStore = () => {
     return container.resolve(AppStore);
 }
 
-// @ts-ignore
 @singleton()
 export class AppStore {
 
