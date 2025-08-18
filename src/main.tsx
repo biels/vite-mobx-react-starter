@@ -5,7 +5,7 @@ import App from './App.tsx'
 import './index.css'
 import {configure} from "mobx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {ScheduleTest} from "./pages/schedule-test/ScheduleTest.tsx";
+import {ExamplePage} from "./pages/example-page/ExamplePage.tsx";
 
 configure({
     enforceActions: "never",
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "/sim",
-        element: <ScheduleTest />,
+        path: "/example",
+        element: <ExamplePage />,
     },
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
