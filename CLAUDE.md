@@ -52,4 +52,88 @@ This project uses **MobX** for state management. Please follow these guidelines:
 - **Cleaner separation**: Business logic lives in stores, not components
 
 ### Key Configuration
-The project has `enforceActions: "never"` configured, meaning you can modify observables directly without wrapping in actions. Also, organize classes propelry, and understand existing logic wehen adding or updating features.
+The project has `enforceActions: "never"` configured, meaning you can modify observables directly without wrapping in actions. Also, organize classes properly, and understand existing logic when adding or updating features.
+
+## Adding New Pages
+
+To add a new page to this application, follow this pattern:
+
+### 1. Create Page Structure
+Create a new folder in `src/pages/` with this structure:
+```
+src/pages/your-page-name/
+├── YourPageName.tsx        # Page component (observer-wrapped)
+├── YourPageStore.tsx       # MobX store for the page
+└── your-logic/             # (Optional) Business logic layer
+    ├── YourLogic.ts
+    ├── YourModel.ts
+    └── YourTypes.ts
+```
+
+### 2. Create the MobX Store
+```typescript
+// YourPageStore.tsx
+import {container, singleton} from "tsyringe";
+import {makeObservable, observable} from "mobx";
+
+export let useYourPageStore = () => {
+    return container.resolve(YourPageStore);
+}
+
+@singleton()
+export class YourPageStore {
+    @observable
+    loading = false;
+    
+    @observable
+    data: any[] = [];
+
+    constructor() {
+        makeObservable(this);  // IMPORTANT: Call this first!
+        this.init();
+    }
+
+    init() {
+        // Initialize store
+    }
+}
+```
+
+### 3. Create the Page Component
+```typescript
+// YourPageName.tsx
+import React from "react";
+import {observer} from 'mobx-react'
+import {useYourPageStore} from "./YourPageStore.tsx";
+
+export interface YourPageNameProps {}
+
+export const YourPageName = observer((props: YourPageNameProps) => {
+    let store = useYourPageStore()
+    
+    return <div>
+        {store.loading ? "Loading..." : "Your content"}
+    </div>
+})
+```
+
+### 4. Add Route in main.tsx
+```typescript
+// In main.tsx, add your route to the router configuration:
+import {YourPageName} from "./pages/your-page-name/YourPageName.tsx";
+
+const router = createBrowserRouter([
+    // ... existing routes
+    {
+        path: "/your-page",
+        element: <YourPageName />,
+    },
+]);
+```
+
+### Important Notes:
+- **DO NOT** use `useState`, `useEffect`, or `useContext` in page components
+- **ALWAYS** wrap components with `observer()` to make them reactive
+- **ALWAYS** call `makeObservable(this)` first in store constructors
+- Use the custom hook pattern (`useYourPageStore`) to access stores
+- Keep business logic in stores, not in components
