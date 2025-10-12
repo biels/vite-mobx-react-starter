@@ -24,6 +24,7 @@
     "allowUnreachableCode": true,
     "pretty": true,
     "skipDefaultLibCheck": true,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": ["src"],

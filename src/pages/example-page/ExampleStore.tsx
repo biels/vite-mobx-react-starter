@@ -17,12 +17,11 @@ export class ExampleStore {
     exampleLogic: ExampleLogic = new ExampleLogic();
 
     constructor() {
-        this.init();
         makeObservable(this);
+        this.init();
     }
 
-
     init() {
-        window['exampleLogic'] = this.exampleLogic;
+        // Initialize store - add your setup logic here
     }
 }

@@ -16,8 +16,8 @@ export class AppStore {
     count = 0;
 
     constructor() {
-        this.init();
         makeObservable(this);
+        this.init();
     }
 
 
