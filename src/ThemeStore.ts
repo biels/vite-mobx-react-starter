@@ -1,17 +1,17 @@
 import {container, singleton} from "tsyringe";
-import {makeObservable, observable} from "mobx";
+import {action, makeObservable, observable, reaction} from "mobx";
 
 export let useThemeStore = () => {
     return container.resolve(ThemeStore);
 }
 
-export type Theme = 'light' | 'dark';
-
 @singleton()
 export class ThemeStore {
 
     @observable
-    theme: Theme = 'light';
+    darkModeActive = false;
+
+    private prefersDarkQuery: MediaQueryList | null = null;
 
     constructor() {
         makeObservable(this);
@@ -19,33 +19,71 @@ export class ThemeStore {
     }
 
     init() {
-        // Check for saved theme preference or default to system preference
-        const savedTheme = localStorage.getItem('theme') as Theme;
-        if (savedTheme) {
-            this.theme = savedTheme;
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            this.theme = 'dark';
+        this.prefersDarkQuery = window.matchMedia
+            ? window.matchMedia('(prefers-color-scheme: dark)')
+            : null;
+
+        this.loadDarkModePreference();
+
+        if (this.prefersDarkQuery) {
+            if (typeof this.prefersDarkQuery.addEventListener === 'function') {
+                this.prefersDarkQuery.addEventListener('change', this.onSystemPreferenceChange);
+            } else if (typeof (this.prefersDarkQuery as any).addListener === 'function') {
+                (this.prefersDarkQuery as any).addListener(this.onSystemPreferenceChange);
+            }
         }
-        this.applyTheme();
+
+        reaction(
+            () => this.darkModeActive,
+            (isDark) => this.applyDarkModeClass(isDark),
+            {fireImmediately: true},
+        );
     }
 
-    toggleTheme() {
-        this.theme = this.theme === 'light' ? 'dark' : 'light';
-        this.applyTheme();
-        localStorage.setItem('theme', this.theme);
+    private isAutoModeActive() {
+        return localStorage.getItem('darkMode') === null;
     }
 
-    setTheme(theme: Theme) {
-        this.theme = theme;
-        this.applyTheme();
-        localStorage.setItem('theme', theme);
+    @action
+    toggleDarkMode(e?: { shiftKey?: boolean }) {
+        if (e?.shiftKey) {
+            this.setDarkModeAuto();
+            return;
+        }
+        this.darkModeActive = !this.darkModeActive;
+        localStorage.setItem('darkMode', this.darkModeActive.toString());
     }
 
-    applyTheme() {
-        if (this.theme === 'dark') {
-            document.documentElement.classList.add('dark');
+    @action
+    setDarkModeAuto() {
+        this.darkModeActive = this.prefersDarkQuery?.matches ?? false;
+        localStorage.removeItem('darkMode');
+    }
+
+    private loadDarkModePreference() {
+        const savedPreference = localStorage.getItem('darkMode');
+        if (savedPreference !== null) {
+            this.darkModeActive = savedPreference === 'true';
+            return;
+        }
+        this.darkModeActive = this.prefersDarkQuery?.matches ?? false;
+    }
+
+    private onSystemPreferenceChange = (event: MediaQueryListEvent) => {
+        if (!this.isAutoModeActive()) {
+            return;
+        }
+        this.darkModeActive = event.matches;
+    };
+
+    private applyDarkModeClass(isDark: boolean) {
+        const root = document.documentElement;
+        root.classList.add('theme-switching');
+        if (isDark) {
+            root.classList.add('dark');
         } else {
-            document.documentElement.classList.remove('dark');
+            root.classList.remove('dark');
         }
+        window.setTimeout(() => root.classList.remove('theme-switching'), 0);
     }
 }
