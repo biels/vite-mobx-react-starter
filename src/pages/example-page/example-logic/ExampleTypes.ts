@@ -21,13 +21,13 @@ export interface ExampleCollection {
     collectionIndex: number
     position: number
     quantity: number
-    metadata: any
+    metadata: Record<string, unknown>
 }
 
 export interface ExampleUpdate {
     updateId: number
     action: "create" | "update" | "delete"
-    payload?: any
+    payload?: unknown
     timestamp?: number
 }
 

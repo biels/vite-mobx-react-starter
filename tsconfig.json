@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -14,19 +14,16 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    /* Type checking */
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "strictNullChecks": false,
-    "suppressImplicitAnyIndexErrors": true,
+    "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "allowUnreachableCode": true,
     "pretty": true,
-    "skipDefaultLibCheck": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "tests/fixtures"]
 }

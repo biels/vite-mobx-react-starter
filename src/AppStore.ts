@@ -2,7 +2,7 @@ import {container, singleton} from "tsyringe";
 import {makeObservable, observable} from "mobx";
 
 
-export let useAppStore = () => {
+export const useAppStore = () => {
     return container.resolve(AppStore);
 }
 
@@ -22,10 +22,10 @@ export class AppStore {
 
 
     init() {
-
+        // Reserved for starter-specific initialization.
     }
 
-    setCounter(param: any) {
-        this.count = param;
+    setCounter(nextCount: number) {
+        this.count = nextCount;
     }
 }

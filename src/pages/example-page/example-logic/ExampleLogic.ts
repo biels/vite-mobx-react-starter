@@ -5,7 +5,7 @@ export interface ExampleItem {
     id: string;
     name: string;
     value: number;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
 }
 
 interface ExampleState {
@@ -37,10 +37,10 @@ export class ExampleLogic {
      * Example tree operation - replace with your logic
      */
     addChildNode(node: ExampleNode, state: ExampleState) {
-        const newNode = {
+        const newNode: ExampleNode = {
             parent: node,
             children: [],
-            state: state
+            state
         }
         node.children.push(newNode)
         return newNode

@@ -1,5 +1,12 @@
 # Project Guidelines
 
+## Maintenance and Compatibility
+
+- Run `bun run check` after changes; it validates strict TypeScript, store regressions, and the production build.
+- Use the Node version in `.nvmrc` and the Bun version in `package.json`. Keep `bun.lock` and `package-lock.json` synchronized.
+- This starter intentionally uses MobX 6 / mobx-react 9 for legacy decorators and tsyringe metadata. MobX 7 requires a coordinated decorator and dependency injection migration.
+- Import routing APIs from `react-router`; use `react-router/dom` for the browser `RouterProvider`.
+
 ## State Management Approach
 
 This project uses **MobX** for state management. Please follow these guidelines:

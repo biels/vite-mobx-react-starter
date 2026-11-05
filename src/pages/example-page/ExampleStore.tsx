@@ -3,11 +3,10 @@ import {makeObservable, observable} from "mobx";
 import {ExampleLogic} from "./example-logic/ExampleLogic.ts";
 
 
-export let useExampleStore = () => {
+export const useExampleStore = () => {
     return container.resolve(ExampleStore);
 }
 
-// @ts-ignore
 @singleton()
 export class ExampleStore {
 
@@ -22,6 +21,6 @@ export class ExampleStore {
     }
 
     init() {
-        // Initialize store - add your setup logic here
+        // Initialize starter-specific store state here.
     }
 }

@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import {configure} from "mobx";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter} from "react-router";
+import {RouterProvider} from "react-router/dom";
 import {ExamplePage} from "./pages/example-page/ExamplePage.tsx";
 import {container} from "tsyringe";
 import {ThemeStore} from "./ThemeStore.ts";

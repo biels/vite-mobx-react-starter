@@ -2,19 +2,15 @@ import React from "react";
 import {observer} from 'mobx-react'
 import {useExampleStore} from "./ExampleStore.tsx";
 import {useThemeStore} from "../../ThemeStore.ts";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { FiSun, FiMoon, FiHome } from 'react-icons/fi';
 import {Button} from "../../components/Button.tsx";
 
-export interface ExamplePageProps {
-
-}
-
-export const ExamplePage = observer((props: ExamplePageProps) => {
-    let store = useExampleStore()
-    let themeStore = useThemeStore()
-    let logic = store.exampleLogic;
-    let exampleData = logic.getExampleData();
+export const ExamplePage = observer(() => {
+    const store = useExampleStore()
+    const themeStore = useThemeStore()
+    const logic = store.exampleLogic;
+    const exampleData = logic.getExampleData();
 
     return <div className="min-h-screen bg-app text-text-primary transition-colors duration-200 p-6 sm:p-8">
         <div className="mx-auto max-w-7xl">

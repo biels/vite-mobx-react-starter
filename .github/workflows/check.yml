@@ -1,0 +1,29 @@
+name: Starter checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package-manager: [bun, npm]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: oven-sh/setup-bun@v2
+        if: matrix.package-manager == 'bun'
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+        if: matrix.package-manager == 'bun'
+      - run: npm ci
+        if: matrix.package-manager == 'npm'
+      - run: ${{ matrix.package-manager }} run check

@@ -1,7 +1,7 @@
 import {ExampleItem} from "./ExampleLogic.ts";
 
 // Example data - replace with your actual data
-export let exampleData: ExampleItem[] = [
+export const exampleData: ExampleItem[] = [
     {
         id: "1",
         name: "Example Item 1",

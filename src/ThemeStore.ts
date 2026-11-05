@@ -1,7 +1,11 @@
 import {container, singleton} from "tsyringe";
 import {action, makeObservable, observable, reaction} from "mobx";
 
-export let useThemeStore = () => {
+type LegacyMediaQueryList = MediaQueryList & {
+    addListener?: (listener: (event: MediaQueryListEvent) => void) => void;
+};
+
+export const useThemeStore = () => {
     return container.resolve(ThemeStore);
 }
 
@@ -28,8 +32,8 @@ export class ThemeStore {
         if (this.prefersDarkQuery) {
             if (typeof this.prefersDarkQuery.addEventListener === 'function') {
                 this.prefersDarkQuery.addEventListener('change', this.onSystemPreferenceChange);
-            } else if (typeof (this.prefersDarkQuery as any).addListener === 'function') {
-                (this.prefersDarkQuery as any).addListener(this.onSystemPreferenceChange);
+            } else if (typeof (this.prefersDarkQuery as LegacyMediaQueryList).addListener === 'function') {
+                (this.prefersDarkQuery as LegacyMediaQueryList).addListener?.(this.onSystemPreferenceChange);
             }
         }
 

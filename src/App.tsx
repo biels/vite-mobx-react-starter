@@ -1,13 +1,13 @@
 import {observer} from "mobx-react";
 import {useAppStore} from "./AppStore.ts";
 import {useThemeStore} from "./ThemeStore.ts";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import {Button} from "./components/Button.tsx";
 
 const App = observer(() => {
-    let appStore = useAppStore()
-    let themeStore = useThemeStore()
+    const appStore = useAppStore()
+    const themeStore = useThemeStore()
 
     return <div className="min-h-screen bg-app text-text-primary transition-colors duration-200 p-6 sm:p-8">
         <div className="mx-auto max-w-7xl">
