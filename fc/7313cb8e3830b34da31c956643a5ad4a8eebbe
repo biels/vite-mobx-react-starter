@@ -1,0 +1,82 @@
+.github/workflows/check.yml
+  s_faa8e836996c7a::t_c105ccd6835383 1-12,16-21,23-25
+  s_faa8e836996c7a::t_feabf49fd1cb33 13-15,22,26-29
+CLAUDE.md
+  s_faa8e836996c7a::t_e1aac5104ef2df 5
+  s_faa8e836996c7a::t_d3ba730e0177e5 3-4,6-9
+src/index.css
+  2daee5f1729553c4 4-5
+.nvmrc
+  s_faa8e836996c7a::t_d9e71fc0eac47d 1
+src/App.tsx
+  s_faa8e836996c7a::t_d9e71fc0eac47d 4
+README.md
+  s_faa8e836996c7a::t_c105ccd6835383 7-16,18-30,32,34-39,41-42,44-48,51-58,60-63
+  s_faa8e836996c7a::t_e1aac5104ef2df 33,40,43,49-50
+  s_faa8e836996c7a::t_41f0c5e3366f8f 4-6
+src/pages/example-page/ExamplePage.tsx
+  s_faa8e836996c7a::t_d9e71fc0eac47d 5
+tsconfig.json
+  s_faa8e836996c7a::t_d9e71fc0eac47d 3,5,20,28
+  s_faa8e836996c7a::t_e1aac5104ef2df 17
+package.json
+  s_faa8e836996c7a::t_e1aac5104ef2df 18,37
+  38f07e0cf1df2e30 8,11,15-16
+  s_faa8e836996c7a::t_d9e71fc0eac47d 7,9-10,17,21-26,31-36,38
+src/main.tsx
+  s_faa8e836996c7a::t_d9e71fc0eac47d 7-8
+tsconfig.node.json
+  s_faa8e836996c7a::t_d9e71fc0eac47d 3-7
+tests/stores.test.mjs
+  s_faa8e836996c7a::t_c20f563ae5aad9 1-95,97-124
+  s_faa8e836996c7a::t_082cf6195fbb19 96
+tests/fixtures/Stores.ts
+  s_faa8e836996c7a::t_c20f563ae5aad9 1,3-4,7-18
+  s_faa8e836996c7a::t_c105ccd6835383 2,5-6
+vite.config.ts
+  2daee5f1729553c4 5
+  s_faa8e836996c7a::t_d9e71fc0eac47d 1-2,7-8
+src/pages/example-page/example-logic/ExampleLogic.ts
+  s_faa8e836996c7a::t_d9e71fc0eac47d 40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "fc7313cb8e3830b34da31c956643a5ad4a8eebbe",
+  "prompts": {
+    "2daee5f1729553c4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6162262f-6242-4cdd-89a3-53910090a7cc",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Biel Simon Rojas <bielsimon2@gmail.com>",
+      "total_additions": 8,
+      "total_deletions": 12,
+      "accepted_lines": 3,
+      "overriden_lines": 0
+    },
+    "38f07e0cf1df2e30": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d10d5-4f57-7b20-b001-e4c24ff730b2",
+        "model": "gpt-5.4"
+      },
+      "human_author": "Biel Simon Rojas <bielsimon2@gmail.com>",
+      "total_additions": 23,
+      "total_deletions": 11,
+      "accepted_lines": 4,
+      "overriden_lines": 0
+    }
+  },
+  "sessions": {
+    "s_faa8e836996c7a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10186-9855-7ea0-a4ce-9a615c7f54dc",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Biel Simon Rojas <bielsimon2@gmail.com>"
+    }
+  }
+}
